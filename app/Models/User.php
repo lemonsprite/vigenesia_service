@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\MotivasiController;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,9 +19,10 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'nama',
         'email',
         'password',
+        'role_id'
     ];
 
     /**
@@ -41,4 +43,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function hasMotivasi()
+    {
+        return $this->hasMany(Motivasi::class, 'id_user');
+    }
 }
