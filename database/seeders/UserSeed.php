@@ -15,14 +15,14 @@ class UserSeed extends Seeder
      */
     public function run()
     {
-        User::created([
+        User::create([
             'nama' => 'Admin',
             'email' => 'admin@vigenesia.com',
             'role_id' => 1,
             'password' => Hash::make('admin'),
         ]);
 
-        User::created([
+        User::create([
             'nama' => 'User',
             'email' => 'user@vigenesia.com',
             'role_id' => 2,

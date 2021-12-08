@@ -6,6 +6,7 @@ use App\Http\Resources\MotivasiResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 
 class UserController extends Controller
 {
@@ -16,11 +17,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        // Ambil data ditambah relasi tabel motivasi
-        $user = User::with(['hasMotivasi']);
+        // // Ambil data ditambah relasi tabel motivasi
+        // $user = User::with(['hasMotivasi']);
 
-        // Return respon API
-        return UserResource::collection($user->get())->response();
+        // // Return respon API
+        // return UserResource::collection($user->get())->response();
+
+        // Ambil data user dan return
+        $user = User::all();
+        return response($user, 201);
     }
 
 
@@ -32,10 +37,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        // Ambil data berdasar ID
-        $user = User::find($id)->get();
+        // Ambil data ditambah relasi tabel motivasi
+        $user = User::with(['hasMotivasi'])->where('id', $id);
 
         // Return respon API
-        return UserResource::collection($user);
+        return UserResource::collection($user->get())->response();
     }
 }
