@@ -57,7 +57,7 @@ class MotivasiController extends Controller
         ]);
 
         // Ambil data jika ada, apabila tidak ada throw exception
-        $res = Motivasi::findOrFails($id);
+        $res = Motivasi::find($id);
 
         // Update database dari parameter request
         $res->update($req->all());
